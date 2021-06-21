@@ -7,13 +7,13 @@ import ssdeep    #pip install ssdeep
 
 
 # getHashes(): return a dictionary with hashes and their values
-def getHashes(file):
+def getHashes(filename):
     # Initalize a Dictionary Object
     hashDict = dict()
 
     # Opens file in binary to be able to determine the hashes for md5, sha1, sha256
-    with open(file, 'rb') as f:
-        content = f.read()
+    with open(filename, 'rb') as file:
+        content = file.read()
         hashDict["md5"] = hashlib.md5(content).hexdigest()
         hashDict["sha1"] = hashlib.sha1(content).hexdigest()
         hashDict["sha256"] = hashlib.sha256(content).hexdigest()
@@ -23,8 +23,8 @@ def getHashes(file):
     return hashDict
 
 # getFileSize(): returns the size (in bytes) of the file
-def getFileSize(file):
-    return os.path.getsize(f"{file}")
+def getFileSize(filename):
+    return os.path.getsize(f"{filename}")
 
 # sql_init(): Initialize sql schema
 def sql_init(db):
@@ -76,4 +76,12 @@ def sql_view(db):
 
 
 if __name__ == "__main__":
-    sql_add("ex.db", 2018)
+
+    folder = "2018"
+
+    for file in os.listdir(f"{folder}"):
+        if(getFileSize(file) > 25000000):
+            print(f"{file} => {getFileSize(file)}")
+
+
+    #sql_add("ex.db", 2018)
