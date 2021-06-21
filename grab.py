@@ -41,7 +41,7 @@ def main():
 
 if __name__ == "__main__":
 
-    invade()
+    # invade()
     check_size()
 
     # ps = infected | VirusTotal
