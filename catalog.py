@@ -22,6 +22,10 @@ def getHashes(file):
     # Returns Dictionary Object with hashing algo and their respective hashes
     return hashDict
 
+# getFileSize(): returns the size (in bytes) of the file
+def getFileSize(file):
+    return os.path.getsize(f"{file}")
+
 # sql_init(): Initialize sql schema
 def sql_init(db):
     # Opens a connection to the db
@@ -64,6 +68,11 @@ def sql_view(db):
 
         for row in cur.execute('SELECT * FROM samples'):
             print(row)
+
+
+# If 
+# > 25000000 than > 25 MB and no to it being in the database
+
 
 
 if __name__ == "__main__":
