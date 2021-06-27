@@ -14,7 +14,6 @@ def getHashes(filename):
     # Opens file in binary to be able to determine the hashes for md5, sha1, sha256
     with open(filename, 'rb') as file:
         content = file.read()
-        hashDict["md5"] = hashlib.md5(content).hexdigest()
         hashDict["sha1"] = hashlib.sha1(content).hexdigest()
         hashDict["sha256"] = hashlib.sha256(content).hexdigest()
         hashDict["ssdeep"] = ssdeep.hash(content)
@@ -47,38 +46,44 @@ def enumerateBatches():
 
 # This function is vulnerable to an SQL injection
 # sql_init(): Initialize sql schema
-def sql_init(db):
+def sql_init(db, tableName):
 
     # Opens a connection to the db
     with sqlite3.connect(db) as con:
         cur = con.cursor()
 
-        cur.execute(f''' CREATE TABLE set
-                        (name text, md5 text, sha1 text, sha256 text, 
-                        ssdeep text, size text, url text, batchNum text)''')
+        cur.execute(f"""
+            CREATE TABLE {tableName}
+            (name text, sha1 text, sha256 text, 
+            ssdeep text, size text, url text, batchNum int. set int)
+            """)
         
         con.commit()
 
+# checkTableExistence(): checks the existence of a table in a db file
+def checkTableExistence(db):
+    retVal = False
 
-def checkTableExistence(db, tableName):
+    # Checks if it has at least one table
     with sqlite3.connect(db) as con:
         cur = con.cursor()
 
         cur.execute("""
             SELECT COUNT(*)
-            FROM information_schema.tables
-            WHERE table_name = '{0}'
-        """.format(tableName.replace('\'', '\'\'')))
+            FROM sqlite_master
+            WHERE type='table'
+        """)
 
-        if cur.fetchone()[0] == 1:
-            cur.close()
-            return True
-        
-        cur.close()
-        return False
+        print(cur.fetchone())
+
+        if cur.fetchone()[0] > 0:
+            retVal = True
+    
+    return retVal
+
 
 # sql_add(): add to the sql database
-def sql_add(db): #, folder):
+def sql_add(db, ): #, folder):
 
     dset = list()
     batches = list()
@@ -145,7 +150,12 @@ if __name__ == "__main__":
 
     # folder = "2018"
 
-    sql_add("set.db")
+    # sql_add("set.db")
+
+    sql_init("malset.db","yes")
+
+    print("table Exsitence: ")
+    print(checkTableExistence("malset.db"))
 
     # for file in os.listdir(f"{folder}"):
     #     if(getFileSize(file) > 25000000):
