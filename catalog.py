@@ -20,8 +20,8 @@ def ultimateDB():
 
 
     ## Checks if there exists a DB with a Table
-    if(not checkTableExistence(DBNAME)):
-        sql_init(DBNAME)
+    # if(not checkTableExistence(DBNAME)):
+    #     sql_init(DBNAME)
 
     batches = enumerateBatches()
 
@@ -48,9 +48,7 @@ def ultimateDB():
             # Cursor adds to the sql database
             sql_add(cur, filelocation, sha1, sha256, ssdeep, filesize, url, batchNum, setNum)
             con.commit()
-            print("DONE")
-
-    
+    print("DONE")
 
     con.close()
 
@@ -97,10 +95,10 @@ if __name__ == "__main__":
     # print(getFileSize("LICENSE"))
     
     #dir = "/home/andres/Desktop/malset"
-    # ultimateDB()
+    ultimateDB()
     # print(checkInDB("0a5b61191ee281b31c3b273fb129cfc87f68907d8d247ef0c2d7dbef65757c10"))
 
     # checkFilesInDir(dir)
-    checkFilesInDir(DIR)
+    # checkFilesInDir(DIR)
 
     pass

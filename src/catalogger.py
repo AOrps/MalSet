@@ -110,7 +110,7 @@ if __name__ == "__main__":
 
     # sql_add("set.db")
 
-    sql_init("malset.db","yes")
+    sql_init("malset.db")
 
-    print("table Exsitence: ")
-    print(checkTableExistence("malset.db"))
+    # print("table Exsitence: ")
+    # print(checkTableExistence("malset.db"))
