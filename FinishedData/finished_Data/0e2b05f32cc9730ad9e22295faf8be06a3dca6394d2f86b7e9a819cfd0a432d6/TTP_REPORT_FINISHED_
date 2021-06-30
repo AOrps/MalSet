@@ -1,1 +1,0 @@
-"mitre_attcks":[{"tactic":"Command and Control","technique":"Custom Command and Control Protocol","attck_id":"T1094","attck_id_wiki":"https:\\/\\/attack.mitre.org\\/techniques\\/T1094","malicious_identifiers_count":0,"malicious_identifiers":[],"suspicious_identifiers_count":1,"suspicious_identifiers":[],"informative_identifiers_count":0,"informative_identifiers":[]}]
