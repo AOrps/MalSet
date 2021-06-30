@@ -1,9 +1,12 @@
 from src.catalogger import *
 import sqlite3
+import hashlib
+import os
 # ========================================================
 # CONSTANTS
 
 DBNAME = "malset.db"
+DIR = "/home/andres/Desktop/ultimate/yes/grab/Android"
 
 
 # ========================================================
@@ -64,13 +67,40 @@ def checkInDB(sha256):
             return False
         
         return True
-    
 
+
+
+def checkFilesInDir(dir):
+    count = 0
+
+    for file in os.scandir(dir):
+        filepath = file.path
+
+        sha256 = ""
+
+        with open(filepath, 'rb') as file:
+            sha256 = hashlib.sha256(file.read()).hexdigest()
+
+            inDB = checkInDB(sha256)
+
+            if(inDB):
+                os.system(f"rm {filepath}")
+
+            if(not inDB):
+                print(f"{filepath} not in db")
+                count += 1
+        
+    print(f"There are a total of {count} files not in the DB")
+    print("DONE")
 
 if __name__ == "__main__":
     # print(getFileSize("LICENSE"))
     
+    #dir = "/home/andres/Desktop/malset"
     # ultimateDB()
-    print(checkInDB("ed4e8a77128e0d20670f34cfd9e7f0caa25fbe12bed3448c632e527773ff275a"))
+    # print(checkInDB("0a5b61191ee281b31c3b273fb129cfc87f68907d8d247ef0c2d7dbef65757c10"))
+
+    # checkFilesInDir(dir)
+    checkFilesInDir(DIR)
 
     pass

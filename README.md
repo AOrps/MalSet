@@ -11,4 +11,13 @@ rm *.7z
 
 # Move first 10 items
 mv `ls | head -n 10` {loca}
+
+# Get hash of the dex files
+file * | grep -i "Dalvik" | awk '{print $1}' | cut -c 1-64
+
+# Remove dex files
+rm $(file * | grep -i "Dalvik" | awk '{print $1}' | cut -c 1-64 )
+
+# Giga Chad Era
+for file in `ls *7z`; do 7z x $file -pinfected; 7z x $file -pVirusTotal; rm $file; done
 ```
