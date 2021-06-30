@@ -3,7 +3,7 @@
 import os
 
 
-DIR = "."
+DIR = "/home/andres/Desktop/ultimate/yes/grab"
 
 
 # Get's File Size in bytes
@@ -43,6 +43,14 @@ def check_size_and_destroy():
             print(f"{file} => {getFileSize(file)}")
             os.system(rm(file))
 
+
+def checkSizeAtDirNDestroy(dir):
+    for f in os.scandir(dir):
+        filepath = f.path
+        if(getFileSize(filepath) > 75000000):
+            print(f"{filepath} => {getFileSize(filepath)}")
+            os.system(rm(filepath))
+
 # rmAll(): Removes all the 7z and JSON files
 def rmAll():
     os.system(rm7z())
@@ -67,7 +75,8 @@ if __name__ == "__main__":
 
     # Uncomment invade() to extract all .7z files
     # invade()
-    betterInvade(DIR)
+    # betterInvade(DIR)
+    checkSizeAtDirNDestroy(DIR)
 
     # Uncomment check_size() to remove and identify files larger than 25MB
     # check_size()

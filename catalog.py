@@ -6,7 +6,7 @@ import os
 # CONSTANTS
 
 DBNAME = "malset.db"
-DIR = "/home/andres/Desktop/ultimate/yes/grab/Android"
+DIR = "/home/andres/Desktop/ultimate/yes/grab"
 
 
 # ========================================================
