@@ -1,6 +1,6 @@
 # MalSet
 
-This is a dataset of all malicious apk files less than 25 MB in size
+This is a dataset of all malicious Andoid Malware .apk files less than 25 MB in size
 
 ```sh
 # Extract all 7z files
